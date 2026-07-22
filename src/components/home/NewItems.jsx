@@ -4,6 +4,7 @@ import axios from "axios";
 import Slider from "react-slick";
 import AuthorImage from "../../images/author_thumbnail.jpg";
 import nftImage from "../../images/nftImage.jpg";
+import "./NewItems.css"
 
 function Countdown({ expiryDate }) {
   const [timeLeft, setTimeLeft] = useState('');
