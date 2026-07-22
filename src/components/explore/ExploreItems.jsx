@@ -42,7 +42,7 @@ const ExploreItems = () => {
   useEffect(() => {
     async function fetchCollections() {
       const response = await axios.get(
-        `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore`
+        `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore`,
       );
       setCollections(response.data);
       setOriginalCollections(response.data);
@@ -63,10 +63,10 @@ const ExploreItems = () => {
     const value = e.target.value;
     setFilter(value);
 
-      if (value === "") {
-    setCollections([...originalCollections]);
-    return;
-  }
+    if (value === "") {
+      setCollections([...originalCollections]);
+      return;
+    }
 
     let sorted = [...collections];
     if (value === "price_low_to_high") {
@@ -153,7 +153,11 @@ const ExploreItems = () => {
       ))}
       {visibleCount < collections.length && (
         <div className="col-md-12 text-center">
-          <button onClick={handleLoadMore} id="loadmore" className="btn-main lead">
+          <button
+            onClick={handleLoadMore}
+            id="loadmore"
+            className="btn-main lead"
+          >
             Load more
           </button>
         </div>
