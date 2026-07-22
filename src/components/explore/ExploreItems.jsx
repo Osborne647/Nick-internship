@@ -33,7 +33,6 @@ function Countdown({ expiryDate }) {
 }
 
 const ExploreItems = () => {
-  const [originalCollections, setOriginalCollections] = useState([]);
   const [collections, setCollections] = useState([]);
   const [loading, setLoading] = useState(true);
   const [visibleCount, setVisibleCount] = useState(8);
@@ -45,7 +44,6 @@ const ExploreItems = () => {
         `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore`,
       );
       setCollections(response.data);
-      setOriginalCollections(response.data);
       setLoading(false);
     }
     fetchCollections();
@@ -59,25 +57,21 @@ const ExploreItems = () => {
     setVisibleCount((prev) => prev + 4);
   };
 
-  const handleFilter = (e) => {
-    const value = e.target.value;
-    setFilter(value);
+const handleFilter = async (e) => {
+  const value = e.target.value;
+  setFilter(value);
+  setLoading(true);
+  setVisibleCount(8);
 
-    if (value === "") {
-      setCollections([...originalCollections]);
-      return;
-    }
+  let url = `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore`;
+  if (value) {
+    url += `?filter=${value}`;
+  }
 
-    let sorted = [...collections];
-    if (value === "price_low_to_high") {
-      sorted.sort((a, b) => a.price - b.price);
-    } else if (value === "price_high_to_low") {
-      sorted.sort((a, b) => b.price - a.price);
-    } else if (value === "likes_high_to_low") {
-      sorted.sort((a, b) => b.likes - a.likes);
-    }
-    setCollections(sorted);
-  };
+  const response = await axios.get(url);
+  setCollections(response.data);
+  setLoading(false);
+};
 
   return (
     <>
