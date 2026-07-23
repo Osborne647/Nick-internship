@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import "./ItemDetails.css"
+import "./ItemDetails.css";
+import Skeleton from "../components/UI/Skeleton";
 
 const ItemDetails = () => {
   const { nftId } = useParams();
@@ -20,39 +21,40 @@ const ItemDetails = () => {
   }, [nftId]);
 
   if (loading)
-  return (
-    <div id="wrapper">
-      <div className="no-bottom no-top" id="content">
-        <section aria-label="section" className="mt90 sm-mt-0">
-          <div className="container">
-            <div className="row">
-              <div className="col-md-6 text-center">
-                <div className="skeleton" style={{ width: "100%", height: 400, borderRadius: 8 }}></div>
-              </div>
-              <div className="col-md-6">
-                <div className="item_info">
-                  <div className="skeleton" style={{ width: "60%", height: 32, marginBottom: 20 }}></div>
-                  <div className="skeleton" style={{ width: "30%", height: 20, marginBottom: 20 }}></div>
-                  <div className="skeleton" style={{ width: "100%", height: 80, marginBottom: 20 }}></div>
-                  <div className="d-flex flex-row">
-                    <div className="mr40">
-                      <div className="skeleton" style={{ width: 50, height: 50, borderRadius: "50%" }}></div>
-                      <div className="skeleton" style={{ width: 100, height: 16, marginTop: 8 }}></div>
+    return (
+      <div id="wrapper">
+        <div className="no-bottom no-top" id="content">
+          <section aria-label="section" className="mt90 sm-mt-0">
+            <div className="container">
+              <div className="row">
+                <div className="col-md-6 text-center">
+                  <Skeleton width="100%" height={400} borderRadius={8} />
+                </div>
+                <div className="col-md-6">
+                  <div className="item_info">
+                    <Skeleton width="60%" height={32} />
+                    <Skeleton width="30%" height={20} />
+                    <Skeleton width="100%" height={80} />
+                    <div className="d-flex flex-row" style={{ marginTop: 20 }}>
+                      <div className="mr40">
+                        <Skeleton width={50} height={50} borderRadius="50%" />
+                        <Skeleton width={100} height={16} />
+                      </div>
+                      <div>
+                        <Skeleton width={50} height={50} borderRadius="50%" />
+                        <Skeleton width={100} height={16} />
+                      </div>
                     </div>
-                    <div>
-                      <div className="skeleton" style={{ width: 50, height: 50, borderRadius: "50%" }}></div>
-                      <div className="skeleton" style={{ width: 100, height: 16, marginTop: 8 }}></div>
-                    </div>
+                    <Skeleton width="20%" height={24} />
                   </div>
-                  <div className="skeleton" style={{ width: "20%", height: 24, marginTop: 40 }}></div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
-    </div>
-  );
+    );
+
   if (!item) return <div>Item not found</div>;
 
   return (
@@ -85,7 +87,6 @@ const ItemDetails = () => {
                     aperiam, eaque ipsa quae ab illo inventore veritatis et
                     quasi architecto beatae vitae dicta sunt explicabo.
                   </p>
-
                   <div className="d-flex flex-row">
                     <div className="mr40">
                       <h6>Creator</h6>
@@ -120,9 +121,7 @@ const ItemDetails = () => {
                       </div>
                     </div>
                   </div>
-
                   <div className="spacer-40"></div>
-
                   <div className="de_tab">
                     <h6>Price</h6>
                     <div className="nft-item-price">
