@@ -83,7 +83,22 @@ const handleFilter = async (e) => {
           <option value="likes_high_to_low">Most liked</option>
         </select>
       </div>
-      {collections.slice(0, visibleCount).map((item, index) => (
+      {loading
+  ? new Array(8).fill(0).map((_, index) => (
+      <div
+        key={index}
+        className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
+        style={{ display: "block", backgroundSize: "cover" }}
+      >
+        <div className="nft__item">
+          <div className="skeleton" style={{ width: 50, height: 50, borderRadius: "50%" }}></div>
+          <div className="skeleton" style={{ width: "100%", height: 200, marginTop: 10, borderRadius: 8 }}></div>
+          <div className="skeleton" style={{ width: "60%", height: 20, marginTop: 10 }}></div>
+          <div className="skeleton" style={{ width: "30%", height: 16, marginTop: 8 }}></div>
+        </div>
+      </div>
+    ))
+  : collections.slice(0, visibleCount).map((item, index) => (
         <div
           key={index}
           className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
