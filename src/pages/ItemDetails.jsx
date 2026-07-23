@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const ItemDetails = () => {
   const { nftId } = useParams();
@@ -9,11 +10,10 @@ const ItemDetails = () => {
 
   useEffect(() => {
     async function fetchItem() {
-      const response = await axios.get(
-        `https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems`
+      const { data } = await axios.get(
+        `https://us-central1-nft-cloud-functions.cloudfunctions.net/itemDetails?nftId=${nftId}`,
       );
-      const found = response.data.find((i) => String(i.nftId) === nftId);
-      setItem(found || null);
+      setItem(data);
       setLoading(false);
     }
     fetchItem();
@@ -37,7 +37,9 @@ const ItemDetails = () => {
               </div>
               <div className="col-md-6">
                 <div className="item_info">
-                  <h2>{item.title} #{item.nftId}</h2>
+                  <h2>
+                    {item.title} #{item.nftId}
+                  </h2>
                   <div className="item_info_counts">
                     <div className="item_info_views">
                       <i className="fa fa-eye"></i> {item.views || 250}
@@ -47,38 +49,56 @@ const ItemDetails = () => {
                     </div>
                   </div>
                   <p>
-                    Sed ut perspiciatis unde omnis iste natus error sit voluptatem
-                    accusantium doloremque laudantium, totam rem aperiam, eaque
-                    ipsa quae ab illo inventore veritatis et quasi architecto
-                    beatae vitae dicta sunt explicabo.
+                    Sed ut perspiciatis unde omnis iste natus error sit
+                    voluptatem accusantium doloremque laudantium, totam rem
+                    aperiam, eaque ipsa quae ab illo inventore veritatis et
+                    quasi architecto beatae vitae dicta sunt explicabo.
                   </p>
 
                   <div className="d-flex flex-row">
                     <div className="mr40">
-                      <h6>Creator</h6>
-                      <div className="item_author">
-                        <div className="author_list_pp">
-                          <img className="lazy" src={item.authorImage} alt="" />
-                          <i className="fa fa-check"></i>
-                        </div>
-                        <div className="author_list_info">
-                          <span>{item.creator || "Monica Lucas"}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <div>
                       <h6>Owner</h6>
                       <div className="item_author">
                         <div className="author_list_pp">
-                          <img className="lazy" src={item.authorImage} alt="" />
-                          <i className="fa fa-check"></i>
+                          <Link to={`/author/${item.ownerId}`}>
+                            <img
+                              className="lazy"
+                              src={item.ownerImage}
+                              alt=""
+                            />
+                            <i className="fa fa-check"></i>
+                          </Link>
                         </div>
                         <div className="author_list_info">
-                          <span>{item.owner || "Nicholas Daniels"}</span>
+                          <Link to={`/author/${item.ownerId}`}>
+                            <span>{item.ownerName}</span>
+                          </Link>
                         </div>
                       </div>
                     </div>
                   </div>
+                  <br />
+                  <br />
+                  <h6>Creator</h6>
+                      <div className="item_author">
+                        <div className="author_list_pp">
+                          <Link to={`/author/${item.creatorId}`}>
+                            <img
+                              className="lazy"
+                              src={item.creatorImage}
+                              alt=""
+                            />
+                            <i className="fa fa-check"></i>
+                          </Link>
+                        </div>
+                        <div className="author_list_info">
+                          <Link to={`/author/${item.creatorId}`}>
+                            <span>{item.creatorName}</span>
+                          </Link>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
 
                   <div className="spacer-40"></div>
 
