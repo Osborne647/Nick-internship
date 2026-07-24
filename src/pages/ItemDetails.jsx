@@ -21,40 +21,40 @@ const ItemDetails = () => {
   }, [nftId]);
 
   if (loading)
-    return (
-      <div id="wrapper">
-        <div className="no-bottom no-top" id="content">
-          <section aria-label="section" className="mt90 sm-mt-0">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-6 text-center">
-                  <Skeleton width="100%" height={400} borderRadius={8} />
-                </div>
-                <div className="col-md-6">
-                  <div className="item_info">
-                    <Skeleton width="60%" height={32} />
-                    <Skeleton width="30%" height={20} />
-                    <Skeleton width="100%" height={80} />
-                    <div className="d-flex flex-row" style={{ marginTop: 20 }}>
-                      <div className="mr40">
-                        <Skeleton width={50} height={50} borderRadius="50%" />
-                        <Skeleton width={100} height={16} />
-                      </div>
-                      <div>
-                        <Skeleton width={50} height={50} borderRadius="50%" />
-                        <Skeleton width={100} height={16} />
-                      </div>
+  return (
+    <div id="wrapper">
+      <div className="no-bottom no-top" id="content">
+        <section aria-label="section" className="mt90 sm-mt-0">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-6 text-center">
+                <Skeleton width="100%" height={500} borderRadius={8} />
+              </div>
+              <div className="col-md-6">
+                <div className="item_info">
+                  <Skeleton width="60%" height={32} />
+                  <Skeleton width="30%" height={20} />
+                  <Skeleton width="100%" height={80} />
+                  <div className="d-flex flex-row" style={{ marginTop: 20 }}>
+                    <div className="mr40">
+                      <Skeleton width={50} height={50} borderRadius="50%" />
+                      <Skeleton width={100} height={16} />
                     </div>
-                    <Skeleton width="20%" height={24} />
+                    <div>
+                      <Skeleton width={50} height={50} borderRadius="50%" />
+                      <Skeleton width={100} height={16} />
+                    </div>
                   </div>
+                  <Skeleton width="20%" height={24} style={{ marginTop: 40 }} />
                 </div>
               </div>
             </div>
-          </section>
-        </div>
+          </div>
+        </section>
       </div>
-    );
-
+    </div>
+  );
+  
   if (!item) return <div>Item not found</div>;
 
   return (
